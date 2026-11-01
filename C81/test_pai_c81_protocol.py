@@ -52,7 +52,8 @@ class Tests(unittest.TestCase):
         self.assertFalse(contact_with(m,d,suction,paper))
     def test_no_real_camera_or_hardware_claim(self):
         source=__import__("inspect").getsource(__import__("pai_c81_robot_runtime"))
-        self.assertIn("simulated color+shape sensor",source)
+        self.assertIn("実カメラではなく",source)
+        self.assertIn("仮想センサの色と寸法",source)
         self.assertIn("contact_with(model,data,arm_geom",source)
 if __name__=="__main__":
     unittest.main(verbosity=2)
