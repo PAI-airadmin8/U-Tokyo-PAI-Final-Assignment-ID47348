@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+**/__pycache__/
+*.pyc
+.venv/
+*.log
+*.mp4
+*.sqlite3
+rosbag2/
+C81_final_*/
+.ipynb_checkpoints/
+.DS_Store
