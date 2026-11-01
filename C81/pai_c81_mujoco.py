@@ -137,6 +137,6 @@ def main():
         e=mujoco.mj_name2id(model,mujoco.mjtObj.mjOBJ_EQUALITY,"vacuum_"+name)
         print("EQ",name,e,model.eq_data[e,:7],flush=True)
     if args.dry_run:return
-    print("IMPLEMENTATION_PENDING")
+    print("SCENE_MODEL_ONLY: run pai_c81_robot_runtime.py or run_pai_c81_final3.sh for the robot task.")
 if __name__=="__main__":
     main()
