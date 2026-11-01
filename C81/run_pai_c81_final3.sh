@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# AIノードを独立起動し、3配置の実験・録画・検証を行う。
+# AIノードを起動し、3配置の実験・記録・QAを実行する。
 set -eo pipefail
 source /opt/ros/humble/setup.bash
 export DISPLAY=:0 MUJOCO_GL=glfw
