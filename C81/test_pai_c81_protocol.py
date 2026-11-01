@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent C81 protocol/physics/model unit tests, no business containers."""
+"""C81のROS通信・物理動作・AIモデルに関する単体テスト。"""
 import json,unittest
 from types import SimpleNamespace
 import numpy as np

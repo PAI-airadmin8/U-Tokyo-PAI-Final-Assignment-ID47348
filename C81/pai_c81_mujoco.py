@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""PAI C81: honest MuJoCo contact-activated vacuum pick/place (simulation only).
-Robot is an omnidirectional planar-drive PROXY and 3-axis gantry arm, NOT a
-physical AMR, full 6-DoF arm, autonomous biped, or real-camera RGB-D perception.
-Physics is advanced by applied actuator forces + mj_step only. Free trash bodies
-move only from contacts, gravity, and dynamically activated suction welds.
+"""C81のMuJoCoモデルを定義する。
+台車は平面移動、工具は3軸直動の簡略化した構造。
+接触を確認した場合だけ仮想吸着拘束を有効化する。
+物体の移動は接触・重力・拘束による物理計算で行う。
+実機、実カメラ、6軸ロボットアームではない。
 """
 from __future__ import annotations
 import argparse, csv, hashlib, json, math, os, time
@@ -26,7 +26,7 @@ OBJECTS=[
  ("wrapper_1","wrapper",(1.43,.40)),
  ("personal_1","personal",(.34,-.62)),
 ]
-# Three independent INITIAL MuJoCo layouts; no object pose teleport in the loop.
+# 初期配置を3種類用意する。実行中に物体を瞬間移動させない。
 LAYOUT=int(os.environ.get("PAI_C81_LAYOUT","0"))
 if LAYOUT==1:
     OBJECTS=[("paper_1","paper",(-.25,-.25)),

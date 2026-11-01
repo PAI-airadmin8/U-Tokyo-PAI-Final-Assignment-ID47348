@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Independent strict QA of three ROS+MuJoCo contact pick/place runs and rosbag.
-Fails if replay evidence is missing, object was not physically recovered,
-private item was touched, ROS AI is internal, policy hash changed, or video
-is below the course requirement. Does not claim real robot / real camera.
+"""3配置のROS 2 / MuJoCo実験を独立して検証する。
+接触・回収・私物保護、ROS記録・AIモデルの一致、
+動画の要件を確認する。実機や実カメラの実験ではない。
 """
 import argparse, collections, csv, hashlib, json, re, sqlite3, subprocess, sys
 from pathlib import Path

@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""C81 end-to-end AI -> ROS 2 -> force-driven MuJoCo cart & tool -> contact-only
-vacuum grasp -> transport -> release into bin -> reinspection.
-Scope: simulated color+shape sensor (not camera), simplified holonomic base
-(force-driven planar Cartesian proxy), 3-axis manipulator (not six-axis arm).
-Suction actuates a weld ONLY upon measured MuJoCo geom contact, updates its
-current relative offset, and deactivates after reaching the bin. Never set free
-object qpos/qvel after initialization or teleport an object.
+"""AI分類→ROS 2通信→MuJoCoの移動→接触→仮想吸着→投下→再確認。
+実カメラではなく、仮想センサの色と寸法を利用する。
+移動台車と3軸工具は簡略化した構造である。
+実際の接触時のみ吸着を有効化し、回収箱で解除する。
+物体の位置と速度を実行途中に直接書き換えない。
 """
 from __future__ import annotations
 import argparse, csv, hashlib, json, math, os, time, uuid
@@ -38,7 +36,7 @@ class Bridge:
             self.phase_pub=self.node.create_publisher(String,"/pai_b/phase",10)
             self.node.create_subscription(String,"/pai_b/ai_classification",self.receive,10)
             print("C81_ROS_READY",self.session_id,flush=True)
-            time.sleep(3.0) # allow rosbag and independent AI subscriber discovery
+            time.sleep(3.0) # rosbagと独立AIノードが通信相手を見つけるまで待つ。
     def receive(self,msg):
         try:
             a=json.loads(msg.data)
@@ -93,8 +91,8 @@ def model_ids(m):
         j[name]=(int(m.jnt_qposadr[i]),int(m.jnt_dofadr[i]))
     return j
 def set_weld(m,d,index,tool_body,obj_body):
-    # Compute relative body pose at contact, rather than reverting to the
-    # initial model pose, which would cause a huge physically false impulse.
+    # 接触時点の相対位置を使う。
+    # 初期位置に戻すと、不自然な大きな力が生じてしまう。
     pos=d.xpos[obj_body]-d.xpos[tool_body]
     inv=d.xquat[tool_body].copy();inv[1:]*=-1
     rot=np.empty(9);mujoco.mju_quat2Mat(rot,inv)
@@ -199,7 +197,7 @@ def do_run(args):
                     x=pt(obj)
                     rgb=[float(z) for z in color.split()[:3]]
                     dim=[float(z) for z in size.split()]
-                    # Appearance + dimension descriptor simulated from geometry.
+                    # 物体の形状から仮想的な色・寸法の特徴量を作る。
                     feature=rgb+dim
                     ai=bridge.ai(feature,current,round(float(x[0]),4),round(float(x[1]),4),"SCAN")
                     pred=ai["label"]; labels.append({"id":current,"pred":pred,"truth":k,
@@ -224,8 +222,8 @@ def do_run(args):
                 obj=objs[current];pos=pt(obj)
                 zhalf=float(model.geom_size[obj["geom"],1] if current_kind=="cup" else model.geom_size[obj["geom"],2])
                 top=float(pos[2])+zhalf
-                # Unloaded cup center = .68m at lift=0. Bottom of sphere
-                # touches when sphere center is object top + sphere radius.
+                # lift=0では工具の球中心が約0.68m。
+                # 球中心が物体上面と球半径の和になると接触する。
                 control["lift"]=float(np.clip(top+.037-.68,-.73,0))
                 if contact_with(model,data,arm_geom,obj["geom"]):
                     set_weld(model,data,obj["weld"],gripper,obj["body"])
@@ -276,10 +274,10 @@ def do_run(args):
                 if t-start_stage>1:
                     current=None;to_phase("SCAN")
             elif phase=="DONE":
-                # keep final animation to show result
+                # 最後の動きを確認できるよう、終了直前の描画を少し続ける。
                 if t-start_stage>3.0:break
-            # Dynamics: actuated joint forces only. Cart is a holonomic
-            # platform drive abstraction, arm is 3-axis gantry, NO qpos teleports.
+            # 関節に加えた力で物理計算を進める。
+            # 台車は平面移動、工具は3軸直動の簡略モデル。座標を飛ばして動かさない。
             target={
                 "cart_x":base_goal[0]+1.4,"cart_y":base_goal[1],
                 "reach_x":control["reach_x"],"reach_y":control["reach_y"],

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Reproducible educational simulator run, independent of any pre-existing ROS AI node.
+# AIノードを独立起動し、3配置の実験・録画・検証を行う。
 set -eo pipefail
 source /opt/ros/humble/setup.bash
 export DISPLAY=:0 MUJOCO_GL=glfw

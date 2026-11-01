@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Independent ROS2 educational AI classifier for MuJoCo geometric-color sensor.
-No real camera; 4-class synthetic appearance+geometry classification via an
-actual multiclass softmax trained on synthetic labeled examples.
+"""MuJoCoの仮想センサ用に作成した独立ROS 2 AIノード。
+実カメラではなく、物体の色と寸法を特徴量にする。
+合成データから学習した4クラスのSoftmax分類器で判断する。
 """
 import hashlib,json,os
 import numpy as np
