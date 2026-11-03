@@ -1,0 +1,82 @@
+{
+  "utc": "2026-11-03T08:28:39.939290+00:00",
+  "application": "Physical AI 応用1 AIロボ V3",
+  "no_github_upload": true,
+  "no_detachable_joint": true,
+  "replays": [
+    {
+      "filename": "onepass_pass1_20261103.json",
+      "pass": true,
+      "abort": null,
+      "summary": {
+        "real_lift_mm": 5.923616699999856,
+        "transport_mm": 89.49350686995304,
+        "final_xy_error_mm": 11.519273678856477,
+        "final_z_error_mm": 0.0005847299999750533,
+        "final_paper_xyz": {
+          "x": 0.14936903602,
+          "y": -0.0264460050114,
+          "z": 1.12249941527
+        }
+      },
+      "stage_count": 44,
+      "feedback_gated_stages": 33,
+      "recorded_attempts": 21
+    },
+    {
+      "filename": "onepass_pass2_20261103.json",
+      "pass": true,
+      "abort": null,
+      "summary": {
+        "real_lift_mm": 6.074176370000073,
+        "transport_mm": 89.2684636868053,
+        "final_xy_error_mm": 8.949908946312522,
+        "final_z_error_mm": 0.004185310000126563,
+        "final_paper_xyz": {
+          "x": 0.146778253664,
+          "y": -0.0271422191403,
+          "z": 1.12249581469
+        }
+      },
+      "stage_count": 44,
+      "feedback_gated_stages": 33,
+      "recorded_attempts": 21
+    },
+    {
+      "filename": "qa_20261103T082615.json",
+      "pass": true,
+      "abort": null,
+      "summary": {
+        "real_lift_mm": 6.684761420000074,
+        "transport_mm": 85.31132313093266,
+        "final_xy_error_mm": 10.409904429769671,
+        "final_z_error_mm": 0.0424747999998587,
+        "final_paper_xyz": {
+          "x": 0.148154025388,
+          "y": -0.0250390641336,
+          "z": 1.1225424748
+        }
+      },
+      "stage_count": 48,
+      "feedback_gated_stages": 33,
+      "recorded_attempts": 21
+    }
+  ],
+  "replay_pass": 3,
+  "replay_total": 3,
+  "joint3_stress_20": {
+    "passed": 20,
+    "tested": 20,
+    "max_error_rad": 1.31303856676e-11
+  },
+  "simulation_initialization_note": "Before grasp only, paper_item set_pose moves target from safe holding position to predefined pickup location. No object pose overrides during grasp/lift/transport/place.",
+  "source_files": [
+    "autonomous_pick_place.py",
+    "src/airobo_native_motion_owner.cpp",
+    "worlds/base_no_detach.sdf",
+    "worlds/place_pedestal.sdf",
+    "run.sh",
+    "run.ps1"
+  ],
+  "pass": true
+}

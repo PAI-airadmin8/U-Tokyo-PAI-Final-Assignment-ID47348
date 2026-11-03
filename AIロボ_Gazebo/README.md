@@ -1,17 +1,32 @@
-# AIロボ｜Gazebo・CRANE+ 発展実験
+# AIロボ V3｜Gazebo・CRANE+ 実物理Pick & Place
 
-授業で使用したCRANE+をGazebo上で動かし、AIの分類結果をロボットアームの動作につなぐ実験です。
+## 本番QA（2026-11-03）
 
-## 確認できたこと
+| 項目 | 正式連続動画と同一試行の結果 |
+|---|---:|
+| 単一入口による自動実行 | PASS |
+| 固定側・可動側のリアル接触 | PASS |
+| 紙片の実際の上昇 | 5.18 mm |
+| 水平搬送 | 88.70 mm |
+| 放置パッド中心誤差 | 1.92 mm |
+| 解放・安全退避 | PASS |
 
-- Gazeboの仮想カメラ画像をROS 2経由でAI分類に渡す
-- ごみをPICK、私物をSKIPと判定する
-- MoveIt 2で対象に接近し、接触センサで接触を確認する
-- 接触後に仮想接続を有効化し、対象を持ち上げて移動・解放する
-- 1配置の分割実験について、独立QA 28項目に合格
+[正式無中断動画](video/AIrobo_V3_Official_FINAL_Continuous_20261103.mp4) ｜ [報告PDF](report/AIrobo_V3_Final_Report_ID47348.pdf) ｜ [実行QA](qa/official_onepass_qa.json)
 
-## 今後の課題
+## 再現
 
-現時点では、各動作を分けて確認した段階です。最初から最後までの連続自動実行、複数配置での安定性、再現用コード一式の公開整理、正式な提出動画は未完了です。
+AA8-N-0061のDockerホストから実行：
 
-このフォルダはGazeboでの発展実験の記録です。C81のMuJoCo版とは別の実装です。
+```powershell
+docker exec pai-crane-ai-base-20261101 bash /home/ubuntu/airobot_ws/pai_airobo_v3_delivery/run.sh
+```
+
+`autonomous_pick_place.py` が唯一の上位運動入口。C++常駐Transport Publisher / SubscriberでJoint 1～4およびハンドを制御し、実関節の3回連続フィードバックと双側Contactで次段を許可します。未到位は最大2試行で停止します。
+
+`worlds/` にSDF、`src/` にControllerソース、`qa/` に独立の試行ログを格納。Joint 3独立往復20/20、従前の独立自動実行3/3も確認済みです。
+
+## 実験範囲・注意
+
+紙片を既知位置に配置するのは**把持前の初期化のみ**。把持後は位置を強制上書きせず、摩擦・衝突・重力により上昇・搬送・放置を検証します。DetachableJointによる仮想吸着は使いません。
+
+実機ではなくGazeboの教育用シミュレーションです。C81のPICK/SKIP分類とは別系統であり、未知物体のカメラ認識・任意位置の経路探索・実機での動作保証は本結果に含まれません。

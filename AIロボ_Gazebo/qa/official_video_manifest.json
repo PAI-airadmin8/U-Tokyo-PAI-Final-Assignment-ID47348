@@ -1,0 +1,36 @@
+{
+  "utc": "2026-11-03T10:06:22.993153+00:00",
+  "video": "/home/ubuntu/airobot_ws/pai_airobo_v3_delivery/video/AIrobo_V3_Official_FINAL_Continuous_20261103.mp4",
+  "qa_file": "/home/ubuntu/airobot_ws/pai_airobo_v3_delivery/runs/qa_20261103T100521.json",
+  "run_exit": 0,
+  "qa_pass": true,
+  "summary": {
+    "real_lift_mm": 5.1829116199999525,
+    "transport_mm": 88.70276148160711,
+    "final_xy_error_mm": 1.9249323107989873,
+    "final_z_error_mm": 0.003053130000152393,
+    "final_paper_xyz": {
+      "x": 0.148674010681,
+      "y": -0.0269502908192,
+      "z": 1.12249694687
+    }
+  },
+  "video_probe": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "nb_frames": "746"
+      }
+    ],
+    "format": {
+      "duration": "62.167000",
+      "size": "1530803"
+    }
+  },
+  "continuous_original": true,
+  "only_initial_pose_reset": true,
+  "pass": true
+}

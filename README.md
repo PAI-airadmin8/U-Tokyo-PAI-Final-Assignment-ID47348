@@ -1,14 +1,12 @@
-# AIロボ｜Physical AI 応用編1 最終課題
+# AIロボ｜Physical AI 講座2026 応用編1 最終課題
 
-アカウントID：ID47348
+ID47348。物体のPICK/SKIP判断と、CRANE+の物理Pick & Placeを教育用シミュレーションで検証しました。
 
-ごみと私物をAIで分類し、回収するかどうかを判断してから、ROS 2経由でロボットの動作につなぐシミュレーションに取り組みました。
+| 実装 | 内容 | 結果 |
+|---|---|---|
+| [C81](C81/) | ROS 2・MuJoCoで分類・PICK/SKIP | 3配置、ごみ9件回収・私物3件SKIP |
+| [AIロボ_Gazebo](AIロボ_Gazebo/) | CRANE+のリアル双側接触・把持・上昇・搬送・放置 | 独立自動QA3/3、本番連続実行PASS |
 
-## 実装
+[正式動画](AIロボ_Gazebo/video/AIrobo_V3_Official_FINAL_Continuous_20261103.mp4) ｜ [報告PDF](AIロボ_Gazebo/report/AIrobo_V3_Final_Report_ID47348.pdf) ｜ [本番QA](AIロボ_Gazebo/qa/official_onepass_qa.json)
 
-- [C81](C81/)｜ROS 2・MuJoCo版：3配置でごみ9件を回収し、私物3件をスキップ。単体テスト7件に合格し、約85秒の動画を確認しました。
-- [AIロボ_Gazebo](AIロボ_Gazebo/)｜Gazebo・CRANE+版：1配置の分割動作を確認し、独立QA 28項目に合格。連続自動実行と正式動画は未完了です。
-
-## 実験範囲
-
-いずれも教育用シミュレーションであり、実機を使った実験ではありません。C81の入力は実カメラ画像ではなく、MuJoCo上の仮想センサ情報です。
+**範囲:** C81のAI判断とGazebo V3の動作は別々の実装。V3単独でカメラ画像から未知物体を分類したものではありません。Gazeboの物理演算を用いたシミュレーションであり、実機実験ではありません。学校への提出受理・採点は別です。
