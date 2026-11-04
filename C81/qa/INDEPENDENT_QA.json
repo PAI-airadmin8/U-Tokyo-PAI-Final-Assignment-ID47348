@@ -1,0 +1,68 @@
+{
+  "checks": [
+    "LAYOUT_0_PHYSICAL_PICK_AND_REINSPECTION_PASS",
+    "LAYOUT_1_PHYSICAL_PICK_AND_REINSPECTION_PASS",
+    "LAYOUT_2_PHYSICAL_PICK_AND_REINSPECTION_PASS",
+    "ROS2_CDR_4TOPIC_SEQ_SESSION_SHA_PASS",
+    "COURSE_MP4_DURATION_H264_PASS",
+    "STATIC_NO_DIRECT_QPOS_QVEL_ACCESS_IN_RUNTIME_PASS"
+  ],
+  "runs": [
+    {
+      "layout": 0,
+      "time": 28.375,
+      "session": "b4db235c4a9e47cba77b35283df4bce0",
+      "recovered": [
+        "paper_1",
+        "cup_1",
+        "wrapper_1"
+      ],
+      "private_skipped": [
+        "personal_1"
+      ],
+      "trace_rows": 284
+    },
+    {
+      "layout": 1,
+      "time": 28.145,
+      "session": "41ab1388b3b14a449768b67d81899ce0",
+      "recovered": [
+        "paper_1",
+        "cup_1",
+        "wrapper_1"
+      ],
+      "private_skipped": [
+        "personal_1"
+      ],
+      "trace_rows": 282
+    },
+    {
+      "layout": 2,
+      "time": 28.49,
+      "session": "4eb1f2bc4ac2418d8f004f23dd29ebc1",
+      "recovered": [
+        "paper_1",
+        "cup_1",
+        "wrapper_1"
+      ],
+      "private_skipped": [
+        "personal_1"
+      ],
+      "trace_rows": 285
+    }
+  ],
+  "bag_topic_counts": {
+    "/pai_b/object_features": 12,
+    "/pai_b/ai_classification": 12,
+    "/pai_b/robot_state": 851,
+    "/pai_b/phase": 851
+  },
+  "total_messages": 1726,
+  "video": {
+    "filename": "PAI_C81_FINAL_3LAYOUTS_85s.mp4",
+    "duration_s": 85.167,
+    "bytes": 1511150,
+    "sha256": "58398ec620740012a2d139fd219317ea8c36ae7d1698250a6cff9f576bef223e"
+  },
+  "pass": true
+}

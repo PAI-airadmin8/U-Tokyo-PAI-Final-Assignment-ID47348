@@ -1,0 +1,63 @@
+{
+  "version": "0.2.0",
+  "name": "大型商業施設の散乱ごみ自律回収ロボットの開発",
+  "subtitle": "ROS 2とMuJoCoによるごみ認識・把持・回収・清掃完了判定",
+  "limits": [
+    "MuJoCo-only, no real hardware",
+    "virtual appearance+geometry sensor, not real camera",
+    "holonomic cart drive proxy, not motorized wheels",
+    "3-axis telescopic arm, not 6DoF",
+    "contact-activated suction weld, not finger-friction grasp",
+    "simulated dry trash, not dirty waste or full indoor SLAM"
+  ],
+  "session_id": "b4db235c4a9e47cba77b35283df4bce0",
+  "model_sha256": "09c14baae693e1895ac68a8231e93c35e1b6fd22056bbcf247d86ffef28f489c",
+  "ai_policy_sha256": "2d6c47aa2b0dfada5f77a65ed7c6a87ff03095dec75435388e5a2c1eb76356fd",
+  "ai_over_external_ros": true,
+  "ai_replies": 4,
+  "rejected_ros_messages": 0,
+  "collected": [
+    "paper_1",
+    "cup_1",
+    "wrapper_1"
+  ],
+  "skipped": [
+    "personal_1"
+  ],
+  "failed": [],
+  "predictions": [
+    {
+      "id": "paper_1",
+      "pred": "paper",
+      "truth": "paper",
+      "confidence": 0.957433,
+      "safety": "PICK"
+    },
+    {
+      "id": "cup_1",
+      "pred": "cup",
+      "truth": "cup",
+      "confidence": 0.974067,
+      "safety": "PICK"
+    },
+    {
+      "id": "wrapper_1",
+      "pred": "wrapper",
+      "truth": "wrapper",
+      "confidence": 0.965413,
+      "safety": "PICK"
+    },
+    {
+      "id": "personal_1",
+      "pred": "personal",
+      "truth": "personal",
+      "confidence": 0.977207,
+      "safety": "SKIP"
+    }
+  ],
+  "frames": 171,
+  "sim_time_s": 28.375,
+  "physics_e2e_pass": true,
+  "contact_gate": "MuJoCo geom-to-geom contact only",
+  "object_position_teleport": "NONE (initial positions are in MJCF; dynamic object joints never set)"
+}

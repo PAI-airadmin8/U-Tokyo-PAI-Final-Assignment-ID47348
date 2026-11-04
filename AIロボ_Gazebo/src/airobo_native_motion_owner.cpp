@@ -1,5 +1,5 @@
-// Physical AI | Gazebo Transport persistent single-owner joint command bridge
-// Commands: SNAP, MOVE <joint> <angle_rad> <tolerance_rad> <max_seconds>, QUIT
+// Physical AI：運動指令を一元管理するGazebo Transportの常駐制御ブリッジ
+// 標準入力：SNAP、MOVE <joint> <angle_rad> <tolerance_rad> <max_seconds>、GRIP、QUIT
 #include <ignition/transport/Node.hh>
 #include <ignition/msgs/double.pb.h>
 #include <ignition/msgs/model.pb.h>
@@ -170,8 +170,7 @@ int main() {
         std::this_thread::sleep_for(milliseconds(50));
       }
       if(!ok) {
-        // Hold the actual position on timeout, preventing a stale target being
-        // continuously driven after the owner aborts the high-level trajectory.
+        // 制限時間超過時は実角度に保持指令を送り、停止後の古い目標指令による運動を防ぐ。
         if(std::isfinite(actual)){
           ignition::msgs::Double hold;hold.set_data(actual);
           for(int k=0;k<5;k++){publishers[name].Publish(hold);std::this_thread::sleep_for(milliseconds(50));}

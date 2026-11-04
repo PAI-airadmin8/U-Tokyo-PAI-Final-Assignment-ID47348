@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""AIロボ V3: one-entrypoint, one motion owner, fully feedback-gated physical Pick & Place."""
+"""AIロボ V3：運動指令を一元化し、実際の関節角と両側接触で全動作を検証する。"""
 import os,sys,json,time,math,subprocess,select,datetime,xml.etree.ElementTree as ET,fcntl
 from pathlib import Path
 BASE=Path(__file__).resolve().parent
 RUN_ID=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S')
 PARTITION=os.environ.get('AIROBO_PARTITION','airobo_auto_'+RUN_ID)
 E=os.environ.copy()
-E.update(IGN_PARTITION=PARTITION,ROS_DOMAIN_ID='84',
- IGN_GAZEBO_RESOURCE_PATH='/home/ubuntu/airobot_ws/install/crane_plus_description/share',
- IGN_GAZEBO_SYSTEM_PLUGIN_PATH='/usr/lib/x86_64-linux-gnu/ign-gazebo-6/plugins')
+E.update(IGN_PARTITION=PARTITION,ROS_DOMAIN_ID=os.environ.get('ROS_DOMAIN_ID','84'),
+ IGN_GAZEBO_RESOURCE_PATH=os.environ.get('IGN_GAZEBO_RESOURCE_PATH','/home/ubuntu/airobot_ws/install/crane_plus_description/share'),
+ IGN_GAZEBO_SYSTEM_PLUGIN_PATH=os.environ.get('IGN_GAZEBO_SYSTEM_PLUGIN_PATH','/usr/lib/x86_64-linux-gnu/ign-gazebo-6/plugins'))
 ROOT=str(BASE/'runs')
 Path(ROOT).mkdir(parents=True,exist_ok=True)
 WORLD=f'{ROOT}/world_{RUN_ID}.sdf'
@@ -120,7 +120,7 @@ try:
  else:die('SIM_NOT_READY')
  initial_paper=pose(initial,'paper_item')
  logstage('ENV_READY',{'q3':initial.get('joint3'),'paper':initial_paper,'topic_conn':initial.get('controller_joint3_connected')})
- # All arm commands through the ONE persistent, acknowledged native bridge.
+ # 各関節の指令は、常駐ブリッジの実フィードバック確認を通した場合のみ先へ進める。
  preparation=[
   ('joint_hand',-.45),('joint3',-.95),('joint4',.15),
   ('joint2',.34),('joint1',-.653),('joint1',-.8218),
