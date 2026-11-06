@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-11-06T10:14:27.077843+00:00",
+  "scenario": "paper",
+  "feature_source": "SYNTHETIC_C81_PROTOTYPE",
+  "execute_requested": true,
+  "motion_started": true,
+  "status": "MOTION_PROCESS_EXITED",
+  "action": "PICK",
+  "reply": {
+    "session_id": "0a3c8c2178ae4bd8aab5c3045efd91d6",
+    "seq": 1,
+    "label": "paper",
+    "confidence": 0.957433,
+    "policy_sha256": "2d6c47aa2b0dfada5f77a65ed7c6a87ff03095dec75435388e5a2c1eb76356fd",
+    "safety": "PICK"
+  },
+  "motion_exit_code": 0
+}
