@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-11-06T10:12:36.371593+00:00",
+  "scenario": "paper",
+  "feature_source": "SYNTHETIC_C81_PROTOTYPE",
+  "execute_requested": false,
+  "motion_started": false,
+  "status": "PICK_APPROVED_DRY_RUN",
+  "action": "PICK",
+  "reply": {
+    "session_id": "963733746d9f4aa5a7708284800d0338",
+    "seq": 1,
+    "label": "paper",
+    "confidence": 0.957433,
+    "policy_sha256": "2d6c47aa2b0dfada5f77a65ed7c6a87ff03095dec75435388e5a2c1eb76356fd",
+    "safety": "PICK"
+  }
+}
