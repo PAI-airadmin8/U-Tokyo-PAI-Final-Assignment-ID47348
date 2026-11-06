@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-11-06T10:12:21.664737+00:00",
+  "scenario": "personal",
+  "feature_source": "SYNTHETIC_C81_PROTOTYPE",
+  "execute_requested": false,
+  "motion_started": false,
+  "status": "SKIPPED_NO_MOTION",
+  "action": "SKIP",
+  "reply": {
+    "session_id": "ef4095c6d84840ddbb0596eeb6460969",
+    "seq": 1,
+    "label": "personal",
+    "confidence": 0.977207,
+    "policy_sha256": "2d6c47aa2b0dfada5f77a65ed7c6a87ff03095dec75435388e5a2c1eb76356fd",
+    "safety": "SKIP"
+  }
+}
