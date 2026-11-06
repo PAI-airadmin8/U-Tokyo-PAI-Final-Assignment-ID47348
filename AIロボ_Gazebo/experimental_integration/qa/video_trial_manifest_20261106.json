@@ -1,0 +1,18 @@
+{
+  "recording_date": "2026-11-06",
+  "source": "X11 desktop continuous capture:97.0",
+  "published_video": "video/AIrobo_C81_ROS_CRANE_Continuous_20261106.mp4",
+  "published_duration_seconds": 67,
+  "source_duration_seconds": 150.934,
+  "source_segment_start_seconds": 79,
+  "segment_is_contiguous": true,
+  "video_width": 1366,
+  "video_height": 768,
+  "video_fps": 15,
+  "sha256": "100af705b8dd87e27d94245693d8919a8d6bf9d91628171047371235e60b2a80",
+  "ros_gate_qa": "qa/video_trial_gate_20261106.json",
+  "motion_qa": "qa/video_trial_motion_20261106.json",
+  "motion_pass": true,
+  "synthetic_feature_input": true,
+  "notes": "Trim removes only pre-roll and post-roll outside motion sequence; no cut within motion. No camera perception."
+}
